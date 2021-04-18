@@ -13,6 +13,7 @@ keyword = 'Expansions'
 cardname = ''
 Expansionlist = []
 cardname_exakt = ""
+Explist = []
 
 
 def card_search():
@@ -24,15 +25,19 @@ def card_search():
     webbrowser.open('https://www.cardmarket.com/de/Magic/')#https://www.cardmarket.com/de/Magic/
     time.sleep(5)
     py.write(cardname, interval=0.1) #suche nach kartenname
-    py.keyDown('return') # press enter
+    py.press('return') # press enter
     time.sleep(2)
+    py.hotkey('ctrl', 'l')
+    py.sleep(1)
+    py.hotkey('ctrl', 'c')
     cardname_exakt = ""
     return cardname
 
 
 
 def get_url():
-    url = input("Bitte Url hier einfügen: ")
+
+    url = input("Bitte Url hier einfügen(nur STRG+V druecken): ")
     return url
 
 def get_card_information(url, cardname):
@@ -40,8 +45,8 @@ def get_card_information(url, cardname):
 
 
     linklistzaehler = 0
-    Explist = ''
 
+    temp = ''
     Substring = 'Expansion'
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     page = requests.get(url, headers=headers)
@@ -62,18 +67,24 @@ def get_card_information(url, cardname):
     #for ele in Expansionlist:
         #Explist = Explist + ele
     #Explist.replace('/de/Magic/Expansions/', ' ')
+
+    #replace /de/Magic/Expansions/
+    for item in Expansionlist:
+        temp = str(item)
+        temp = temp.replace('/de/Magic/Expansions/', ' ')
+        Explist.append(temp)
     print(Explist)
 
 
 
 
-    return Expansionlist
+    return Explist
 
-def convert_list_into_txt(Expansionlist, cardname):
+def convert_list_into_txt(Explist, cardname):
     with open('cardlist.txt', 'a') as writer: #ursprünglich w für write ( a ist adden/appendieren)
         writer.writelines(Expansionlist)
         writer.writelines('\n')
-def convert_list_into_csv(Expansionlist, cardname):
+def convert_list_into_csv(Explist, cardname):
     with open('Cardlist.csv', 'a', newline='') as f: #ursprünglich w für write ( a ist adden/appendieren)
         writer = csv.writer(f)
         writer.writerows(Expansionlist)
@@ -82,10 +93,11 @@ if __name__ == '__main__':
     card_search()
     get_url()
     get_card_information(url)
-    convert_list_into_txt(Expansionlist, cardname)
-    convert_list_into_csv(Expansionlist, cardname)
+    convert_list_into_txt(Explist, cardname)
+    convert_list_into_csv(Explist, cardname)
 #cardname = card_search()
 #url = get_url()
 #Expansionlist = get_card_information(url)
 #convert_list_into_txt(Expansionlist, cardname)
+
 
