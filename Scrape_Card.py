@@ -82,12 +82,12 @@ def get_card_information(url, cardname):
 
 def convert_list_into_txt(Explist, cardname):
     with open('cardlist.txt', 'a') as writer: #ursprünglich w für write ( a ist adden/appendieren)
-        writer.writelines(Expansionlist)
+        writer.writelines(Explist)
         writer.writelines('\n')
 def convert_list_into_csv(Explist, cardname):
     with open('Cardlist.csv', 'a', newline='') as f: #ursprünglich w für write ( a ist adden/appendieren)
         writer = csv.writer(f)
-        writer.writerows(Expansionlist)
+        writer.writerows(Explist)
 
 if __name__ == '__main__':
     card_search()
