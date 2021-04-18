@@ -8,8 +8,8 @@ Terminate = False
 while Terminate is False:
     cardname = card_search()
     url = get_url()
-    Expansionlist = get_card_information(url, cardname)
-    convert_list_into_txt(Expansionlist, cardname)
+    Explist = get_card_information(url, cardname)
+    convert_list_into_txt(Explist, cardname)
     Usereingabe = input('Möchtest du nach einer weiteren Karte suchen(Y/N): ')
     if Usereingabe == 'N':
         Terminate = True
