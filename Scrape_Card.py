@@ -25,7 +25,7 @@ def card_search():
     if cardname_exakt == 'Y':
         cardname = '["' + cardname + '"]'
     webbrowser.open('https://www.cardmarket.com/de/Magic/')#https://www.cardmarket.com/de/Magic/
-    time.sleep(5)
+    time.sleep(3)
     py.write(cardname, interval=0.1) #suche nach kartenname
     py.press('return') # press enter
     time.sleep(2)
