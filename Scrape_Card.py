@@ -4,6 +4,7 @@ import webbrowser
 import pyautogui as py
 import time
 import csv
+import tkinter as tk
 
 
 
@@ -18,8 +19,9 @@ Explist = []
 
 def card_search():
     #https://pyautogui.readthedocs.io/en/latest/
+    cardname =''
     cardname = input("Bitte Kartenname eingeben: ")  #Exakter name ["cardname"]
-    cardname_exakt = input("Ist das der EXAKTE Kartenname (Y/N): ")
+    cardname_exakt = 'Y'
     if cardname_exakt == 'Y':
         cardname = '["' + cardname + '"]'
     webbrowser.open('https://www.cardmarket.com/de/Magic/')#https://www.cardmarket.com/de/Magic/
@@ -30,23 +32,32 @@ def card_search():
     py.hotkey('ctrl', 'l')
     py.sleep(1)
     py.hotkey('ctrl', 'c')
-    cardname_exakt = ""
+    py.sleep(1)
+    py.hotkey('ctrl', 'r')
     return cardname
 
 
 
 def get_url():
-
-    url = input("Bitte Url hier einfügen(nur STRG+V druecken): ")
+    #url aus clipboard einfügen
+    tempvariable = ''
+    tempvariable = tk.Tk()
+    # keep the window from showing
+    tempvariable.withdraw()
+    url = tempvariable.clipboard_get()
+    #url = input("Bitte Url hier einfügen(nur STRG+V druecken): ")
     return url
 
 def get_card_information(url, cardname):
     links = []
-
-
     linklistzaehler = 0
 
+    #this is necessary to reset the list and to save the x>1nd try to the list
+    Expansionlist= []
+    Explist= []
     temp = ''
+
+
     Substring = 'Expansion'
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     page = requests.get(url, headers=headers)
@@ -99,5 +110,6 @@ if __name__ == '__main__':
 #url = get_url()
 #Expansionlist = get_card_information(url)
 #convert_list_into_txt(Expansionlist, cardname)
+
 
 
