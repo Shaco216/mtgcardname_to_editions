@@ -57,7 +57,7 @@ def card_search():
     py.sleep(1)
     py.hotkey('ctrl', 'c')
     py.sleep(1)
-    py.hotkey('ctrl', 'r')
+    py.hotkey('ctrl', 'w')
     py.sleep(1)
     py.hotkey('alt', 'tab')
     return cardname
