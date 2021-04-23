@@ -19,6 +19,7 @@ def get_price(url, filetype):
     page = requests.get(url, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
     Preis = []
+    Preisliste = []
     for prize in soup.findAll(class_='col-price pr-sm-2'):
 
         Preis.append(prize.text)
